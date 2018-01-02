@@ -33,6 +33,7 @@ containerView = content.viewManager.CreateContainerView(
 
 # Loop through all objects to return name and VMware tools version
 children = containerView.view
+print("There are a total of %d Total VMs " %(len(children)))
 for child in children:
     childOS = child.summary.config.guestFullName
     childIP = child.summary.guest.ipAddress
@@ -40,4 +41,4 @@ for child in children:
 
 
 #disconnect session to vCenter
-connect.Disconnect(my_vcenter)
+#connect.Disconnect(my_vcenter)
