@@ -1,4 +1,8 @@
-#vCenter inventory script
+#vCenter 6.5 throws an error "Value Illegal" when there are disks with SCSI ID of 15
+# this script scans all VMs in the inventory, and gives a list of all affected VMs
+# perhaps it'll even fix them
+
+
 #by Nico Aguilera
 
 #Ensure Python 2/3 compatibility
@@ -31,14 +35,21 @@ recursive = True  # so it goes into folders
 containerView = content.viewManager.CreateContainerView(
     container, viewType, recursive)
 
-# Loop through all objects to return name and VMware tools version
+# Loop through all objects to return name and disks
 children = containerView.view
 print("There are a total of %d Total VMs " %(len(children)))
 for child in children:
-    childOS = child.summary.config.guestFullName
-    childIP = child.summary.guest.ipAddress
-    print("VM: {}, OS: {}, IP address: {}".format(child.name,childOS,childIP))
+    #if there's a SCSI = 15, add the VM to a new collection
+
+#print the list of affected VMs
 
 
-#disconnect session to vCenter
-connect.Disconnect(my_vcenter)
+#ask if want to try fixing them
+consentToFix = input('Should the script attempt to replace all ocurrences of SCSI ID 15?(y/n):')
+
+if (consentToFix == 'y') or (consentToFix == 'Y')
+    #do stuff
+    #exit with message and results
+    else:
+    #exit with message
+    
