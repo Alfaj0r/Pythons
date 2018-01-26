@@ -49,7 +49,7 @@ ovffile.write(newOvfstring)
 #close the file, this writes to it :)
 ovffile.close()
 
-print ("AddressOnParent 15 values have been replaced with 11")
+print ("OVF modified. All AddressOnParent values that were 15, are now 11.")
 
 # now that the OVF is updated, we need to update the manifest (.mf) which includes SHA1 checksums for all .vmdks and the .ova
 # So, calculate sha1 for the new .ovf and save it into newmfSHA1. 
@@ -62,7 +62,7 @@ with open(ovfpath, 'rb') as afile:
         buf = afile.read(BLOCKSIZE)
 newmfSHA1 = hasher.hexdigest()
 
-print ("new OVF checksum: " + newmfSHA1)
+print ("New OVF checksum: " + newmfSHA1)
 
 # the .mf should have the exact same filename as the .ovf, so just get the path by replacing the extension
 mfpath = ovfpath.replace('.ovf','.mf')
@@ -82,9 +82,9 @@ newMfString = mfstring.replace(oldmfSHA1,newmfSHA1)
 # open the .mf to write to it now
 mffile = open(mfpath,'w')
 
-# write new string
-mffile.write(newmfSHA1)
+# write new string to the .mf and close/save
+mffile.write(newMfString)
 mffile.close()
 
-print ("All done now")
+print ("Manifest (.mf) has been updated with the OVF's new checksums. This OVF should deploy just fine now.")
 input()
