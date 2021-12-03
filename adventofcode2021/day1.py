@@ -3,9 +3,9 @@
 file = open('./inputday1','r')
 contents = file.readlines()
 totalmeasurements = len(contents)
+tally = 1  #hmmm originally had it at 0, but i was off by 1
 for i in range(totalmeasurements):
-    if (i > 0) and (i < 5):
-        print(contents[i-1])
-        #if contents[i] > contents[i-1]:
-         #   increasetally +=1
-    
+    if (i > 0) and (i < totalmeasurements):
+        if contents[i] > contents[i-1]:
+            tally = tally +1
+print(tally)
